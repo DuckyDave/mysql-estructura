@@ -72,10 +72,17 @@ CREATE TABLE IF NOT EXISTS pizzeria.empleat (
   nif CHAR(9) NOT NULL,
   telefon CHAR(9) NOT NULL,
   rol ENUM('cuiner', 'repartidor') NOT NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+/* empleats_botiga */
+CREATE TABLE IF NOT EXISTS pizzeria.empleats_botiga (
+  id_empleat INT UNSIGNED NOT NULL,
   id_botiga INT UNSIGNED NOT NULL COMMENT 'id de la botiga on treballa',
-  PRIMARY KEY (id),
   FOREIGN KEY (id_botiga) REFERENCES pizzeria.botiga (id),
-  INDEX id_botiga (id_botiga ASC))
+  FOREIGN KEY (id_empleat) REFERENCES pizzeria.empleat (id)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -165,19 +172,26 @@ INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, i
 INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (6, 'pizza', 2, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 5.95);
 INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (7, 'pizza', 2, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 5.95);
 INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (8, 'pizza', 2, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 5.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (9, 'pizza', 3, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 7);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (10, 'pizza', 3, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 7);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (11, 'pizza', 3, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 7);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (12, 'pizza', 3, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 7);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (9, 'pizza', 3, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (10, 'pizza', 3, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (11, 'pizza', 3, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (12, 'pizza', 3, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 9.95);
 INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (13, 'hamburguesa', null, 'Clàsica', 'La nostra carn a la graella, acompanyada de cogombret, kétchup i mostassa.', 'imatges/burguer.jpg', 4.95);
 INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (14, 'hamburguesa', null, 'Pollastre', 'Carn de pollastre empanat i lleugerament especiat, enciam i maionesa', 'imatges/burguer_pollastre.jpg', 4.95);
-INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (15, 'begudes', null, 'Coca-Cola', 'Sent la seva màgia', 'imatges/Coca-cola.jpg', 2.95);
+INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (15, 'begudes', null, 'Coca-Cola', 'Ampolla 33cl', 'imatges/coca-cola.jpg', 2.35);
+INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (16, 'begudes', null, 'Aigua Bezoya', 'Amplla 33cl', 'imatges/aigua.jpg', 1.5);
 
-/* Empleats de la pizzeria */
-INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol, id_botiga) VALUES(1, 'Judit', 'Sans Poblet', '26507643M', '621547813', 'repartidor', 1);
-INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol, id_botiga) VALUES(2, 'Francesc', 'Hernandez Doncel', '43598611H', '687285193', 'cuiner', 1);
-INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol, id_botiga) VALUES(3, 'Anna Maria', 'Verdú Castells', '28568625A', '647276917', 'cuiner', 1);
-INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol, id_botiga) VALUES(4, 'Albert', 'Compte Oriol', '98921097Y', '697523748', 'repartidor', 1);
+/* Empleats */
+INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol) VALUES(1, 'Judit', 'Sans Poblet', '26507643M', '621547813', 'repartidor');
+INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol) VALUES(2, 'Francesc', 'Hernandez Doncel', '43598611H', '687285193', 'cuiner');
+INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol) VALUES(3, 'Anna Maria', 'Verdú Castells', '28568625A', '647276917', 'cuiner');
+INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol) VALUES(4, 'Albert', 'Compte Oriol', '98921097Y', '697523748', 'repartidor');
+
+/* empleats de la botiga */
+INSERT INTO empleats_botiga (id_empleat, id_botiga) VALUES (1, 1);
+INSERT INTO empleats_botiga (id_empleat, id_botiga) VALUES (2, 1);
+INSERT INTO empleats_botiga (id_empleat, id_botiga) VALUES (3, 1);
+INSERT INTO empleats_botiga (id_empleat, id_botiga) VALUES (4, 1);
 
 /* dades clients */
 INSERT INTO dades_client (id, nom, cognom1, cognom2, adreca, numero, pis, porta, codi_postal, id_localitat, telefon) VALUES(1, 'Jordi','Sanchez', 'Terol', 'Avinguda Jacint Verdaguer', '115', '3', 'A', '08700', 1, '624879245');
@@ -189,23 +203,74 @@ INSERT INTO dades_client (id, nom, cognom1, cognom2, adreca, numero, pis, porta,
 INSERT INTO dades_client (id, nom, cognom1, cognom2, adreca, numero, pis, porta, codi_postal, id_localitat, telefon) VALUES(7, 'Alícia', 'Cárdenas', 'Herrera', 'Carrer Santa Maria', '20', '3', 'B','08700', 1, '691452387');
 
 /* dades comanda */
+
+/* 3 pizzes, a domicili */
 INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (1, 1, '2020-05-18 19:45:12', 3, 0, 0, 28.35, 4, 'repartiment a domicili', 4, '2020-05-18 22:15:00');
-INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (2, 1, '2020-06-21 20:52:08', 2, 0, 2, 17.8, 6, 'recollir en botiga', 4, null);
+
+/* 2 pizzes i 2 begudes, a recollir en botiga */
+INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (2, 1, '2020-06-21 20:52:08', 2, 0, 2, 16.6, 6, 'recollir en botiga', 4, null);
+
+/* 1 pizza i 1 beguda, a domicili */
 INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (3, 1, '2020-09-26 19:56:01', 1, 0, 1, 9.95, 2, 'repartiment a domicili', 1, '2020-09-26 20:52:08');
-INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (4, 1, '2020-10-02 20:02:09', 1, 1, 2, 17.85, 5, 'repartiment a domicili', 4, '2020-10-02 20:18:38');
-INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (5, 1, '2020-10-30 17:25:00 ', 1, 0, 1, 9.95, 1, 'repartiment a domicili', 1, '2020-10-30 21:56:02');
-INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (6, 1, '2020-11-05 20:01:45', 0, 1, 1, 7.9, 3, 'repartiment a domicili', 4, '2020-11-05 20:29:50');
-INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (7, 1, '2020-11-08 17:27:03', 1, 0, 1, 8.9, 3, 'recollir en botiga', 1, null);
+
+/* 1 pizza, 1 hamburguesa, 2 begudes, a domicili */
+INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (4, 1, '2020-10-02 20:02:09', 1, 1, 2, 17.25, 5, 'repartiment a domicili', 1, '2020-10-02 20:18:38');
+
+/* 1 pizza, 1 beguda, recolir en botiga */
+INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (5, 1, '2020-10-30 17:25:00', 1, 0, 1, 8.3, 1, 'recollir en botiga', 1, null);
+
+/*  1 hamburguesa, 1 beguda, a domicili */
+INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (6, 1, '2020-11-05 20:01:45', 0, 1, 1, 7.3, 3, 'repartiment a domicili', 4, '2020-11-05 20:29:50');
+
+/* 2 pizzes, 1 hamburguesa, 3 begudes, a domicili */
+INSERT INTO comanda (id, id_botiga, data_hora_botiga, num_pizzes, num_hamburgueses, num_begudes, preu_total, id_client, tipus, id_empleat, data_hora_domicili) VALUES (7, 1, '2020-12-02 19:08:05', 2, 1, 3, 26.35, 3, 'repartiment a domicili', 1, '2020-12-02 20:13:02');
 
 /* detalls de comandes (productes) */
+
+/* 1 pizza carbonara */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (1, 1, null, null);
+
+/* 1 pizza pepperoni */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (1, 2, null, null);
+
+/* 1 pizza quatre formatges */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (1, 3, null, null);
+
+/* 1 puzza carbonara i 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, 5, null, 15);
+
+/* 1 pizza pepperoni i 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, 6, null, 15);
+
+/* 1 piza barbacoa i 1 coca-copla */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (3, 12, null, 15);
+
+/* 1 pizza pepperoni i 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, 10, null, 15);
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, null, 14, 15);
+
+/* 1 hamburguesa */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, null, 14, null);
+
+/* 1 coca-cola */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, null, null, 15);
+
+/* 1 pizza quatre formatges i 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (5, 11, null, 15);
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (6, null, 13, 15);
+
+/* 1 hamburguesa */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (6, null, 13, null);
+
+/* 1 coca-cola */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (6, null, null, 15);
+
+/* 1 pizza barbacoa, 1 coca-cola */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, 12, null, 15);
+
+/* 1 pizza carbonara, 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, 9, null, 15);
+
+/* 1 hamburguesa */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, null, 14, null);
+
+/* 1 aigua */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, null, null, 16);
