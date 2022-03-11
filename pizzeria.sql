@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS pizzeria.botiga (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-/* promocions pizza */
-CREATE TABLE IF NOT EXISTS pizzeria.categoria_pizza (
+/* promocions pizzes */
+CREATE TABLE IF NOT EXISTS pizzeria.categoria_pizzes (
   id INT UNSIGNED NOT NULL,
   nom VARCHAR(45) NOT NULL COMMENT 'nom promoció',
   PRIMARY KEY (id))
@@ -111,15 +111,15 @@ DEFAULT CHARACTER SET = utf8mb4;
 /* productes a la venda */
 CREATE TABLE IF NOT EXISTS pizzeria.producte (
   id INT UNSIGNED NOT NULL,
-  tipus ENUM('pizza', 'hamburguesa', 'begudes') NOT NULL,
-  id_categoria_pizza INT UNSIGNED NULL DEFAULT NULL COMMENT 'id categoria pizza',
+  tipus ENUM('pizzes', 'hamburgueses', 'begudes') NOT NULL,
+  id_categoria_pizzes INT UNSIGNED NULL DEFAULT NULL COMMENT 'id categoria pizzes',
   nom VARCHAR(45) NOT NULL,
   descripcio TEXT NOT NULL,
   imatge VARCHAR(45) NOT NULL COMMENT 'URL imatge',
   preu DECIMAL(5,2) NOT NULL,
   PRIMARY KEY (id, tipus),
-  FOREIGN KEY (id_categoria_pizza) REFERENCES pizzeria.categoria_pizza (id),
-  INDEX id_categoria_pizza (id_categoria_pizza ASC))
+  FOREIGN KEY (id_categoria_pizzes) REFERENCES pizzeria.categoria_pizzes (id),
+  INDEX id_categoria_pizzes (id_categoria_pizzes ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -158,28 +158,30 @@ INSERT INTO pizzeria.localitat (id, nom, id_provincia) VALUES(3, 'Vilanova del C
 /* dades botiga */
 INSERT INTO pizzeria.botiga (id, adreca, numero, codi_postal, id_localitat, telefon) VALUES(1, 'Avinguada Caresmar', '23', '08700', 1, '938053838');
 
-/* categories pizza */
-INSERT INTO pizzeria.categoria_pizza (id, nom) VALUES(1, '3 pizzes mitjanes a 9.45 cadascuna a domicili');
-INSERT INTO pizzeria.categoria_pizza (id, nom) VALUES(2, 'Mitjanes a 5.95 a recollir en botiga');
-INSERT INTO pizzeria.categoria_pizza (id, nom) VALUES(3, 'Pizza mitjana més beguda a 9.95 a domicili');
+/* categories pizzes */
+INSERT INTO pizzeria.categoria_pizzes (id, nom) VALUES(1, '3 pizzes mitjanes a 9.45 cadascuna a domicili');
+INSERT INTO pizzeria.categoria_pizzes (id, nom) VALUES(2, 'Mitjanes a 5.95 a recollir en botiga');
+INSERT INTO pizzeria.categoria_pizzes (id, nom) VALUES(3, 'Pizza mitjana més beguda a 9.95 a domicili');
 
 /* productes a la venda */
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (1, 'pizza', 1, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 9.45);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (2, 'pizza', 1, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 9.45);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (3, 'pizza', 1, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 9.45);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (4, 'pizza', 1, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 9.45);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (5, 'pizza', 2, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 5.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (6, 'pizza', 2, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 5.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (7, 'pizza', 2, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 5.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (8, 'pizza', 2, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 5.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (9, 'pizza', 3, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 9.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (10, 'pizza', 3, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 9.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (11, 'pizza', 3, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 9.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (12, 'pizza', 3, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 9.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (13, 'hamburguesa', null, 'Clàsica', 'La nostra carn a la graella, acompanyada de cogombret, kétchup i mostassa.', 'imatges/burguer.jpg', 4.95);
-INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (14, 'hamburguesa', null, 'Pollastre', 'Carn de pollastre empanat i lleugerament especiat, enciam i maionesa', 'imatges/burguer_pollastre.jpg', 4.95);
-INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (15, 'begudes', null, 'Coca-Cola', 'Ampolla 33cl', 'imatges/coca-cola.jpg', 2.35);
-INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizza, nom, descripcio, imatge, preu) VALUES (16, 'begudes', null, 'Aigua Bezoya', 'Amplla 33cl', 'imatges/aigua.jpg', 1.5);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (1, 'pizzes', 1, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 9.45);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (2, 'pizzes', 1, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 9.45);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (3, 'pizzes', 1, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 9.45);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (4, 'pizzes', 1, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 9.45);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (5, 'pizzes', 2, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 5.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (6, 'pizzes', 2, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 5.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (7, 'pizzes', 2, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 5.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (8, 'pizzes', 2, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 5.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (9, 'pizzes', 3, 'Pizza mitjana Carbonara', 'Masa fresca, doble de bacon, champinyons, salsa carbonara, formatge fos i extra de formatge fos', 'imatges/carbonara.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (10, 'pizzes', 3, 'Pizza mitjana Pepperoni', 'La nostra masa de sempre acompanyada de doble racció de pepperoni i formatge fos.', 'imatges/pepperoni.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (11, 'pizzes', 3, 'Pizza mitjana 4 formatges', 'Masa fresca, mescla de quatre formatges i tomàquet.', 'imatges/4quesos.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (12, 'pizzes', 3, 'Pizza mitjana Barbacoa', 'Masa fresca, bacon, pollastre, formatge fos, salsa barbacoa i doble de carne de bou.', 'imatges/barbacoa.jpg', 9.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (13, 'hamburgueses', null, 'Hamburguesa Clàsica', 'La nostra carn a la graella, acompanyada de cogombret, kétchup i mostassa.', 'imatges/burguer.jpg', 4.95);
+INSERT INTO pizzeria.producte (id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (14, 'hamburgueses', null, 'Hamburguesa Pollastre', 'Carn de pollastre empanat i lleugerament especiat, enciam i maionesa', 'imatges/burguer_pollastre.jpg', 4.95);
+INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (15, 'begudes', null, 'Coca-Cola', 'Ampolla 33cl', 'imatges/coca-cola.jpg', 2.35);
+INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (16, 'begudes', null, 'Coca-Cola (inclosa amb la pizza)', 'Ampolla 33cl', 'imatges/coca-cola.jpg', 0);
+INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (17, 'begudes', null, 'Aigua Bezoya', 'Amplla 33cl', 'imatges/aigua.jpg', 1.5);
+INSERT INTO pizzeria.producte (Id, tipus, id_categoria_pizzes, nom, descripcio, imatge, preu) VALUES (18, 'begudes', null, 'Aigua Bezoya (inclosa amb la pizza', 'Amplla 33cl', 'imatges/aigua.jpg', 0);
 
 /* Empleats */
 INSERT INTO empleat (id, nom, cognoms, nif, telefon, rol) VALUES(1, 'Judit', 'Sans Poblet', '26507643M', '621547813', 'repartidor');
@@ -236,17 +238,26 @@ INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_b
 /* 1 pizza quatre formatges */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (1, 3, null, null);
 
-/* 1 puzza carbonara i 1 coca-cola */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, 5, null, 15);
+/* 1 puzza carbonara */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, 5, null, null);
 
-/* 1 pizza pepperoni i 1 coca-cola */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, 6, null, 15);
+/* 1 pizza pepperoni */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, 6, null, null);
 
-/* 1 piza barbacoa i 1 coca-copla */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (3, 12, null, 15);
+/* 1 coca-cola */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, null, null, 15);
 
-/* 1 pizza pepperoni i 1 coca-cola */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, 10, null, 15);
+/* 1 coca-cola */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (2, null, null, 15);
+
+/* 1 piza barbacoa */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (3, 12, null, null);
+
+/* 1 coca-cola (inclosa amb la pizza) */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (3, null, null, 16);
+
+/* 1 pizza pepperoni */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, 10, null, null);
 
 /* 1 hamburguesa */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, null, 14, null);
@@ -254,8 +265,14 @@ INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_b
 /* 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, null, null, 15);
 
-/* 1 pizza quatre formatges i 1 coca-cola */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (5, 11, null, 15);
+/* 1 coca-cola (inclosa amb la pizza */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (4, null, null, 16);
+
+/* 1 pizza quatre formatges */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (5, 7, null, null);
+
+/* 1 coca-cola */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (5, null, null, 15);
 
 /* 1 hamburguesa */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (6, null, 13, null);
@@ -263,14 +280,41 @@ INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_b
 /* 1 coca-cola */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (6, null, null, 15);
 
-/* 1 pizza barbacoa, 1 coca-cola */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, 12, null, 15);
+/* 1 pizza barbacoa */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, 12, null, null);
 
-/* 1 pizza carbonara, 1 coca-cola */
-INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, 9, null, 15);
+/* 1 pizza carbonara*/
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, 9, null, null);
 
 /* 1 hamburguesa */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, null, 14, null);
 
-/* 1 aigua */
+/* 1 coca-cola (inclosa amb la pizza) */
 INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, null, null, 16);
+
+/* 1 coca-cola (inclosa amb la pizza) */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, null, null, 16);
+
+/* 1 aigua */
+INSERT INTO detall_comanda_productes (id_comanda, id_pizza, id_hamburguesa, id_beguda) VALUES (7, null, null, 17);
+
+/* tiquet de venda: comanda 1 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 1;
+
+/* tiquet de venda: comanda 2 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 2;
+
+/* tiquet de venda: comanda 3 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 3;
+
+/* tiquet de venda: comanda 4 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 4;
+
+/* tiquet de venda: comanda 5 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 5;
+
+/* tiquet de venda: comanda 6 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 6;
+
+/* tiquet de venda: comanda 7 */
+select producte.nom, producte.tipus, producte.preu from producte RIGHT JOIN detall_comanda_productes ON (detall_comanda_productes.id_pizza = producte.id OR detall_comanda_productes.id_hamburguesa = producte.id OR detall_comanda_productes.id_beguda = producte.id) WHERE detall_comanda_productes.id_comanda = 7;
